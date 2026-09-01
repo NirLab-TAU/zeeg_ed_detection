@@ -1,7 +1,9 @@
 # Zygomatic EEG model for epileptiform discharges detection in the medial temporal lobe
 
 This notebook details the end-to-end pipeline for developing and validating an XGBoost machine learning model to detect medial temporal lobe(MTL) epileptiform discharges (ED) from zygomatic (zEEG) channels.
+The repository also includes the complete XGBoost model configuration in JSON format.
 
+The process is divided into three main parts:
 The process is divided into three main parts:
 
 1.  **Part 1: Preprocessing and Label Generation**
