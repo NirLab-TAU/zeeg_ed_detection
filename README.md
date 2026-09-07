@@ -1,23 +1,22 @@
-# Zygomatic EEG model for epileptiform discharges detection in the medial temporal lobe
+# Zygomatic EEG model for non-invasive detection of medial temporal lobe epileptiform discharges
 
-This notebook details the end-to-end pipeline for developing and validating an XGBoost machine learning model to detect medial temporal lobe(MTL) epileptiform discharges (ED) from zygomatic (zEEG) channels.
-The repository also includes the complete XGBoost model configuration in JSON format.
+This repository contains the analysis pipeline used to develop, validate, and apply an XGBoost-based model for detecting medial temporal lobe (MTL) epileptiform discharges (EDs) from non-invasive zygomatic EEG (zEEG) recordings.
 
-The process is divided into three main parts:
-The process is divided into three main parts:
+## Analysis overview
 
-1.  **Part 1: Preprocessing and Label Generation**
-    * Loads raw intracranial depth (MTL) data (`.fif` files).
-    * Applies a pre-trained "depth model" to generate ground-truth labels for each 250ms window.
-    * Extracts features from the corresponding zEEG channels for the same windows.
-    * Saves the processed data (features + labels) to `zeeg_training_data.pkl`.
+The code is organized according to the main study phases:
 
-2.  **Part 2: zEEG Model Training and Validation**
-    * Loads the preprocessed data from Part 1.
-    * Performs data balancing and augmentation.
-    * Trains and evaluates an XGBClassifier, and saves the final, trained model (`zeeg_model.pkl`).
+- **`phase_1.ipynb`**  
+   In Phase 1, simultaneous intracranial and zEEG recordings are preprocessed, divided into 250-ms epochs, and used to generate depth-derived ED labels and corresponding zEEG features. These data are then used to train and evaluate the zEEG XGBoost classifier.
 
-3.  **Part 3: Application on Example Non-Invasive Data (HC vs EPI)**
-    * Loads the final trained zEEG model.
-    * Runs the model on independent cohorts of Healthy Controls (HC) and Epilepsy patients (EPI).
-    * Calculates and compares the ED rate between the two groups.
+- **`phase_2_3.ipynb`**
+   In Phases 2 and 3, the trained model is applied to independent non-invasive recordings. The notebooks include the preprocessing steps, feature extraction, and calculation of ED occurrence rates.
+
+- **`zeeg_utils.py`**  
+  Shared utilities for epoching, normalization, and depth/zEEG feature extraction.
+
+- **`model_config.json`**  
+  Contains the complete configuration of the XGBoost model used in the study.
+
+- **`requirements.txt`**  
+  Lists the Python packages and versions used for the analyses.
